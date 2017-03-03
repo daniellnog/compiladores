@@ -10,22 +10,22 @@ import compiler.tree.command.*;
 
 terminal String IDENTIFICADOR;
     
-terminal String  IGUAL_QUE, DIFERENTE_QUE; 
-terminal String  MAIOR_QUE, MENOR_QUE, MAIOR_OU_IGUAL, MENOR_OU_IGUAL;
-terminal String SOMA, SUB, MULT, DIV, RESTO;
-terminal String  AND, OR, NOT;
+terminal Object  IGUAL_QUE, DIFERENTE_QUE; 
+terminal Object  MAIOR_QUE, MENOR_QUE, MAIOR_OU_IGUAL, MENOR_OU_IGUAL;
+terminal Object SOMA, SUB, MULT, DIV, RESTO;
+terminal Object  AND, OR, NOT;
     
-terminal String  ATRIBUICAO, VIRGULA, PONTO_VIRGULA;
-terminal String ABRE_PAR, FECHA_PAR, ABRE_CHAVE, FECHA_CHAVE;
+terminal Object ATRIBUICAO, VIRGULA, PONTO_VIRGULA;
+terminal Object ABRE_PAR, FECHA_PAR, ABRE_CHAVE, FECHA_CHAVE;
     
 terminal String  INT_LITERAL;
 terminal String  FLOAT_LITERAL;
 terminal String  CHAR_LITERAL;
     
-terminal String KEY_IF, KEY_ELSE;
-terminal String KEY_WHILE, KEY_RETURN;
-terminal String KEY_INT, KEY_FLOAT, KEY_CHAR, KEY_PRINT;
-terminal String KEY_VAR, KEY_PROC;
+terminal Object KEY_IF, KEY_ELSE;
+terminal Object KEY_WHILE, KEY_RETURN;
+terminal Object KEY_INT, KEY_FLOAT, KEY_CHAR, KEY_PRINT;
+terminal Object KEY_VAR, KEY_PROC;
 
 
 /***** Nao-terminais *****/

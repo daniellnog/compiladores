@@ -27,7 +27,7 @@ public class sym {
   public static final int KEY_WHILE = 29; // ok
   public static final int KEY_VAR = 35; // ok
   public static final int KEY_FLOAT = 32; // ok
-  public static final int DIV = 12;
+  public static final int DIV = 12; //OK
   public static final int FECHA_PAR = 21; // ok
   public static final int EOF = 0; // ok
   public static final int PONTO_VIRGULA = 19; // ok
