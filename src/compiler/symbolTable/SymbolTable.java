@@ -9,6 +9,7 @@ public class SymbolTable {
 	private HashMap<String, Object> hmGlobal;
 	private Tipo tipoAtual = null;
 	private Boolean fDeclGlobal = true;
+	private int countIndiceVar = 0;
 	private static SymbolTable instance = null;
 
 	public SymbolTable() {
@@ -22,21 +23,30 @@ public class SymbolTable {
 			return instance;
 		}
 		return instance;
-
 	}
-	
-	public void setFDeclGlobal(){
+
+	public int getCountIndiceVar() {
+		return countIndiceVar;
+	}
+
+	public void setCountIndiceVar(int countIndiceVar) {
+		this.countIndiceVar = countIndiceVar;
+	}
+
+	public void setFDeclGlobal() {
 		this.fDeclGlobal = true;
 	}
-	
-	public void disableFDeclGlobal(){
+
+	public void disableFDeclGlobal() {
 		this.fDeclGlobal = false;
 	}
-	
-	public Boolean isDeclGlobal(){
-		if (fDeclGlobal)
+
+	public Boolean isDeclGlobal() {
+		if (fDeclGlobal==true){
 			return true;
-		return false;
+		}else{
+			return false;	
+		}	
 	}
 
 	public Tipo getTipoAtual() {
@@ -51,40 +61,58 @@ public class SymbolTable {
 		this.hmLocal.clear();
 	}
 
-	public boolean nameExistsGlobal(String name) { // retorna True se o nome
-													// existe na tabela
-		if (hmGlobal.containsKey(name))
+	// retorna True se o nome existe na tabela
+
+	
+	public boolean nameExistsGlobal(String id){
+		if (hmGlobal.get(id)!=null){
 			return true;
-		return false;
+		}else{			
+			return false;
+		}
 	}
 
-	public boolean nameExistsLocal(String name) { // retorna True se o nome
-													// existe na tabela
-		if (hmLocal.containsKey(name))
+	// retorna True se o nome existe na tabela
+	public boolean nameExistsLocal(String id) {
+		if (hmLocal.get(id)!=null){
 			return true;
-		return false;
+		}else{			
+			return false;
+		}
+	}
+	
+	public Object getGlobal(String id) {
+		if (hmGlobal.get(id)!=null){
+			return hmGlobal.get(id);
+		}else{			
+			return null;
+		}
 	}
 
-	public Object getLocal(String chave) {
-		if (hmLocal.containsKey(chave))
-			return hmLocal.get(chave);
-		return null;
+	public Object getLocal(String id) {
+		if (hmLocal.get(id)!=null){
+			return hmLocal.get(id);
+		}else{			
+			return null;
+		}
 	}
 
-	public Object getGlobal(String chave) {
-		if (hmGlobal.containsKey(chave))
-			return hmGlobal.get(chave);
-		return null;
-	}
 
-	public void putGlobal(String nome, Object objeto) {
+
+/*	public void putGlobal(String nome, Object objeto) {
 		hmGlobal.put(nome, objeto);
 	}
 
 	public void putLocal(String nome, Object objeto) {
 		hmLocal.put(nome, objeto);
-		
-		
+	}*/
+	
+	public void put(String nome, Object objeto) {
+		// ver como fica a local e global
+		if (hmLocal == null) {
+			hmGlobal.put(nome, objeto);
+		} else {
+			hmLocal.put(nome, objeto);
+		}
 	}
-
 }
