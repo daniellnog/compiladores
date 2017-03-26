@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import compiler.syntax.Lexer;
 import compiler.syntax.Parser;
 import compiler.tree.Programa;
 import java_cup.runtime.Symbol;

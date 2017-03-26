@@ -10,22 +10,22 @@ import compiler.tree.command.*;
 
 terminal String IDENTIFICADOR;
     
-terminal Object  IGUAL_QUE, DIFERENTE_QUE; 
-terminal Object  MAIOR_QUE, MENOR_QUE, MAIOR_OU_IGUAL, MENOR_OU_IGUAL;
-terminal Object SOMA, SUB, MULT, DIV, RESTO;
-terminal Object  AND, OR, NOT;
+terminal String  IGUAL_QUE, DIFERENTE_QUE; 
+terminal String  MAIOR_QUE, MENOR_QUE, MAIOR_OU_IGUAL, MENOR_OU_IGUAL;
+terminal String SOMA, SUB, MULT, DIV, RESTO;
+terminal String  AND, OR, NOT;
     
-terminal Object ATRIBUICAO, VIRGULA, PONTO_VIRGULA;
-terminal Object ABRE_PAR, FECHA_PAR, ABRE_CHAVE, FECHA_CHAVE;
+terminal String ATRIBUICAO, VIRGULA, PONTO_VIRGULA;
+terminal String ABRE_PAR, FECHA_PAR, ABRE_CHAVE, FECHA_CHAVE;
     
 terminal String  INT_LITERAL;
 terminal String  FLOAT_LITERAL;
 terminal String  CHAR_LITERAL;
     
-terminal Object KEY_IF, KEY_ELSE;
-terminal Object KEY_WHILE, KEY_RETURN;
-terminal Object KEY_INT, KEY_FLOAT, KEY_CHAR, KEY_PRINT;
-terminal Object KEY_VAR, KEY_PROC;
+terminal String KEY_IF, KEY_ELSE;
+terminal String KEY_WHILE, KEY_RETURN;
+terminal String KEY_INT, KEY_FLOAT, KEY_CHAR, KEY_PRINT;
+terminal String KEY_VAR, KEY_PROC;
 
 
 /***** Nao-terminais *****/
@@ -87,7 +87,7 @@ decl_variavel ::= KEY_VAR lista_idents:listaIdents SUB tipo:tipo PONTO_VIRGULA
                 
 
 lista_idents ::= IDENTIFICADOR:id resto_lista_idents:rest_list_ident
- 				{: rest_list_ident.addLast(id); RESULT = rest_list_ident; :}
+ 				{: rest_list_ident.addFirst(id); RESULT = rest_list_ident; :}
                ;
 
 
@@ -122,13 +122,13 @@ nome_args ::= IDENTIFICADOR:id ABRE_PAR param_formais:pf FECHA_PAR
              
 
 param_formais ::= IDENTIFICADOR:id SUB tipo:tipo resto_param_formais:rest_par_form
-				{:	rest_par_form.add(new DeclVariavel(id,tipo)); RESULT = rest_par_form;	:}
+				{:	rest_par_form.addFirst(new DeclVariavel(id,tipo)); RESULT = rest_par_form;	:}
                 | /*vazio*/
 				{: RESULT = new LinkedList<DeclVariavel>(); :}
                 ;
 		
 resto_param_formais ::= VIRGULA IDENTIFICADOR:id SUB tipo:tipo resto_param_formais:rest_par_form
-						{:	rest_par_form.add(new DeclVariavel(id,tipo)); RESULT = rest_par_form;	:}
+						{:	rest_par_form.addFirst(new DeclVariavel(id,tipo)); RESULT = rest_par_form;	:}
                       | /*vazio*/
 						{: RESULT = new LinkedList<DeclVariavel>(); :}
                       ; 
@@ -140,7 +140,7 @@ bloco ::= ABRE_CHAVE lista_comandos:lista_cmd FECHA_CHAVE
 			
 		
 lista_comandos ::= lista_comandos:lista_cmd comando:cmd
-					{: lista_cmd.add(cmd); RESULT = lista_cmd; :}
+					{: lista_cmd.addFirst(cmd); RESULT = lista_cmd; :}
 				 | /*vazio*/
  					{: RESULT = new LinkedList<Comando>(); :}
                  ;		
@@ -207,7 +207,7 @@ lista_exprs ::= expressao:e resto_lista_exprs:rle
 
 			
 resto_lista_exprs ::= resto_lista_exprs:rle VIRGULA expressao:e
-					{: rle.addLast(e);   RESULT = rle; :}
+					{: rle.addFirst(e);   RESULT = rle; :}
                     | /*vazio*/
 					{: RESULT = new LinkedList<Expressao>(); :}
                     ;
